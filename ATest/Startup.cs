@@ -4,10 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+
+
 
 namespace ATest
 {
@@ -16,14 +22,29 @@ namespace ATest
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            freeSql = new FreeSql.FreeSqlBuilder()
+                .UseConnectionString(FreeSql.DataType.MySql, Configuration.GetConnectionString("DefaultConnection"))
+                .UseAutoSyncStructure(true)
+                .Build();
         }
 
         public IConfiguration Configuration { get; }
+
+        public IFreeSql freeSql { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSingleton<IFreeSql>(freeSql);
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => options.LoginPath = "/Login/Index");
+
+            services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,13 +65,14 @@ namespace ATest
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Privacy}/{id?}");
             });
         }
     }
