@@ -38,7 +38,11 @@ namespace ATest.Controllers
                     new Claim("role", "Member")
                 };
 
-                await HttpContext.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme, "user", "role")));
+                //声明转换
+                //await HttpContext.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme, "user", "role")));
+
+                //Cookie身份验证
+                await HttpContext.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies", "user", "role")));
 
                 if(Url.IsLocalUrl(returnUrl))
                 {
@@ -58,7 +62,19 @@ namespace ATest.Controllers
             await HttpContext.SignOutAsync();
             return Redirect("/");
         }
+
+
+
+        public IActionResult AccessDenied(string returnUrl = null)
+        {
+            return View();
+        }
+
+
     }
+
+
+    
 
   
 }

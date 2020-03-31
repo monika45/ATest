@@ -7,6 +7,7 @@
     <h1 class="display-4">Welcome</h1>
     <!--<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>-->
 </div>
+
 <dl>
     @foreach (var claim in User.Claims)
     {
@@ -15,8 +16,6 @@
     }
 </dl>
 
-<h2>AuthenticationProperties</h2>
-
 <dl>
     @foreach (var prop in (await Context.AuthenticateAsync()).Properties.Items)
     {
@@ -24,3 +23,4 @@
         <dd>@prop.Value</dd>
     }
 </dl>
+

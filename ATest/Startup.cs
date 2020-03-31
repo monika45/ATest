@@ -19,6 +19,8 @@ namespace ATest
 {
     public class Startup
     {
+        public const string CookieScheme = "Cookies";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -41,10 +43,24 @@ namespace ATest
 
             services.AddSingleton<IFreeSql>(freeSql);
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => options.LoginPath = "/Login/Index");
+            //声明转换
 
-            services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddCookie(options => options.LoginPath = "/Login/Index");
+
+            //services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
+
+
+            //Cookie身份验证
+            services.AddAuthentication(CookieScheme) // set the default scheme to cookies
+                .AddCookie(CookieScheme, options =>
+                {
+                    options.AccessDeniedPath = "/Login/AccessDenied";
+                    options.LoginPath = "/Login/Index";
+                });
+            //自定义cookie选项
+            services.AddSingleton<IConfigureOptions<CookieAuthenticationOptions>, ConfigureMyCookie>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
