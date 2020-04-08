@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,15 +25,15 @@ namespace ATest
         {
             Configuration = configuration;
 
-            freeSql = new FreeSql.FreeSqlBuilder()
-                .UseConnectionString(FreeSql.DataType.MySql, Configuration.GetConnectionString("DefaultConnection"))
+            FreeSql = new FreeSql.FreeSqlBuilder()
+                .UseConnectionString(global::FreeSql.DataType.MySql, Configuration.GetConnectionString("DefaultConnection"))
                 .UseAutoSyncStructure(true)
                 .Build();
         }
 
         public IConfiguration Configuration { get; }
 
-        public IFreeSql freeSql { get; }
+        public IFreeSql FreeSql { get; }
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -41,7 +41,7 @@ namespace ATest
         {
             services.AddControllersWithViews();
 
-            services.AddSingleton<IFreeSql>(freeSql);
+            services.AddSingleton<IFreeSql>(FreeSql);
 
             //声明转换
 
@@ -60,6 +60,10 @@ namespace ATest
                 });
             //自定义cookie选项
             services.AddSingleton<IConfigureOptions<CookieAuthenticationOptions>, ConfigureMyCookie>();
+
+
+           
+
 
         }
 
