@@ -41,7 +41,10 @@ namespace ConsoleTest
 
 
             //元组
-            Tuple.Exam();
+            //Tuple.Exam();
+
+            //WorkWithStrings.AlignmentComponent();
+            WorkWithStrings.FormatStringComponent();
 
 
         }
