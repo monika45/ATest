@@ -44,7 +44,9 @@ namespace ConsoleTest
             //Tuple.Exam();
 
             //WorkWithStrings.AlignmentComponent();
-            WorkWithStrings.FormatStringComponent();
+            //WorkWithStrings.FormatStringComponent();
+            //WorkWithStrings.StringFormatMethod();
+            WorkWithStrings.StringMethods();
 
 
         }

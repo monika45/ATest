@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 
 namespace ConsoleTest
 {
-    public class Tuple
+    public class TupleTest
     {
-        public Tuple()
+        public TupleTest()
         {
         }
 
@@ -126,7 +126,7 @@ namespace ConsoleTest
             return Math.Sqrt(variance / count);
         }
 
-
+        
     }
 
     //使用现有声明析构元组
