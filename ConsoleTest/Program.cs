@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace ConsoleTest
 {
@@ -46,9 +48,54 @@ namespace ConsoleTest
             //WorkWithStrings.AlignmentComponent();
             //WorkWithStrings.FormatStringComponent();
             //WorkWithStrings.StringFormatMethod();
-            WorkWithStrings.StringMethods();
+            //WorkWithStrings.StringMethods();
+            //IsKeyword.PatternMatching();
+            //IdGenerator.test();
+            //IdGenerator.test();
 
 
+            //var dic = new Dictionary<string, string>();
+
+            //using(var reader=new StreamReader("xx.txt"))
+            //{
+            //    while (!reader.EndOfStream)
+            //    {
+            //        var line = reader.ReadLine();
+            //        var temp0= line.Split(' ')[0];
+            //        var temp2= line.Split(' ')[2];
+            //        if (dic.ContainsKey(temp2))
+            //        {
+            //            Console.WriteLine("error");
+            //        }
+            //        else
+            //        {
+            //            dic.Add(temp2, temp0);
+            //        }
+
+            //    }
+            //}
+
+            //Console.WriteLine("one");
+            //Console.WriteLine(System.Text.Encoding.UTF8.GetString(DesTest.Keys, 0, DesTest.Keys.Length));
+            //Console.WriteLine(DesTest.EncryptDES("sss", "12345678"));
+
+            ////WorkWithDateTime.strToDatetime();
+
+            //var data = "gp2NvatvxClwsuBMJyIFBaKGc83kQaPuiS4F0UAOm820Az1Tp8+qOe+jp5HmSBOP";
+            //var key = "17e21417";
+            //Console.WriteLine(DesTest.DecryptDES(data, key));
+            //var key = "12345678";
+            //var s = DesTest.EncryptDES("serwe", key);
+            //Console.WriteLine(s);
+            //Console.WriteLine(DesTest.DecryptDES(s, key));
+
+            //RsaTest.getSign();
+
+            var s = "2.996";
+            Console.WriteLine(Convert.ToDecimal(s).ToString("N2"));
+            
+          
+            
         }
     }
 
